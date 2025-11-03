@@ -45,3 +45,16 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# J temporary files
+JPPTEMP*
+*.ijt
+*.ijs~
+
+# Model files (typically large)
+*.gguf
+*.ggml
+*.bin
+
+# Test outputs
+test_*.ijs
