@@ -70,7 +70,12 @@ cat > syntax_check.ijs << 'EOF'
 NB. Simple syntax check - just load the file
 (3 : 0)''
 try.
-  load '/home/runner/work/llama.jpp/llama.jpp/llama.ijs'
+  NB. Try to find llama.ijs in current directory
+  if. fexist 'llama.ijs' do.
+    load 'llama.ijs'
+  else.
+    load (1!:43'') , '/llama.ijs'
+  end.
   smoutput 'SUCCESS: llama.ijs loaded without syntax errors'
   exit 0
 catch.

@@ -1,8 +1,10 @@
 NB. llama_example.ijs - Example usage of llama.jpp
 NB. Demonstrates the basic API and capabilities
 
-NB. Load the llama.jpp library
-require '/home/runner/work/llama.jpp/llama.jpp/llama.ijs'
+NB. Load llama.jpp - use relative path or specify your path
+NB. require 'llama.ijs'  NB. If llama.ijs is in J's path
+require '~/.local/share/j/addons/llama.jpp/llama.ijs' NB. Example addon path
+NB. Or use absolute path as needed for your installation
 
 NB. =========================================================================
 NB. Example 1: Basic Math Operations

@@ -6,6 +6,12 @@ Note 'llama.jpp'
 A pure J/J++ implementation of llama.cpp for running large language models.
 Supports GGUF format models with quantization.
 Implements transformer architecture with attention and feed-forward networks.
+
+Note on J compatibility:
+- Uses standard J syntax (compatible with J9.0+)
+- Avoids J++ specific constructs for maximum compatibility
+- Some functions from jpp locale may be used for advanced features
+- File operations require 'files' addon
 )
 
 cocurrent 'llama'
@@ -250,12 +256,22 @@ parse_gguf_header =: 3 : 0
   model
 )
 
+NB. Check if file exists (using fexist from files addon or 1!:4)
+file_exists =: 3 : 0
+  NB. Try standard fexist first, fallback to manual check
+  try.
+    fexist y
+  catch.
+    0 < # 1!:4 :: 0: < y
+  end.
+)
+
 NB. Load model from GGUF file
 load_model =: 3 : 0
   filename =. y
   
   NB. Check if file exists
-  if. -. fexist filename do.
+  if. -. file_exists filename do.
     smoutput 'Model file not found: ', filename
     return.
   end.
@@ -331,7 +347,8 @@ generate =: 4 : 0
   
   NB. Generation loop
   output_ids =. input_ids
-  for_i. i. max_tokens do.
+  i =. 0
+  while. i < max_tokens do.
     NB. Forward pass
     pos =. # output_ids
     logits =. model forward (output_ids ; pos)
@@ -344,6 +361,8 @@ generate =: 4 : 0
     
     NB. Check for EOS token (placeholder)
     if. next_token = 1 do. break. end.
+    
+    i =. i + 1
   end.
   
   NB. Decode to text
