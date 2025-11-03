@@ -1,9 +1,35 @@
-# jpp
+# llama.jpp - LLaMA in J++
+
+Pure J/J++ implementation of llama.cpp for running large language models locally.
+
+## What is llama.jpp?
+
+llama.jpp is a J programming language implementation of the core llama.cpp functionality. It enables efficient inference of large language models (LLMs) using the J array programming language, leveraging the jpp (J++) parser extensions.
+
+**Key Features:**
+- Pure J implementation - no external dependencies beyond J
+- Support for GGUF quantized models (Q4_0, Q8_0)
+- Full transformer architecture with attention and FFN
+- RoPE (Rotary Position Embeddings)
+- Temperature-based sampling for text generation
+- Educational and research-friendly codebase
+
+**Quick Start:**
+```j
+require 'llama.ijs'
+model =. llama_init 'path/to/model.gguf'
+output =. model llama_infer 'Once upon a time'
+```
+
+See [LLAMA.md](LLAMA.md) for complete documentation.
+
+---
+
+# jpp (J Plus Plus)
 J Plus Plus.  Licensed GPL3.  Permission for jsoftware to include in J distribution.
 
-
-# 'jpp'
-extends J with auto parenthesizing, and quoting for custom parsers.  User defined primitives.  
+## 'jpp' Parser Extensions
+Extends J with auto parenthesizing, and quoting for custom parsers. User defined primitives.  
 All enhancements are at the (pre)parsing level, with no code execution itself.  
 
 recommend the following 2 userkeys.cfg lines, and load of jpp2.ijs file in config/startup.ijs  
